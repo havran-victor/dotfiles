@@ -23,18 +23,23 @@ They are managed with [GNU Stow](https://www.gnu.org/software/stow/) to keep con
 
 1. Install Arch Linux using `archinstall` (choose your base system and drivers as needed).
 
-2. Install **git**:
+2. Install **Omarchy**:
+   ```bash
+   wget -qO- https://omarchy.org/install | bash
+   ```
+
+3. Install **git**:
    ```bash
    sudo pacman -Sy git
    ```
 
-3. Clone this repo:
+4. Clone this repo:
    ```bash
    git clone git@github.com:havran-victor/dotfiles.git ~/dotfiles
    cd ~/dotfiles
    ```
 
-4. Run the install script:
+5. Run the install script:
    ```bash
    chmod +x install.sh
    ./install.sh
