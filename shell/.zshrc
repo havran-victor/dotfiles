@@ -157,3 +157,6 @@ autoload -U compinit && compinit
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# Created by `pipx` on 2025-08-19 15:50:41
+export PATH="$PATH:/home/victor/.local/bin"
