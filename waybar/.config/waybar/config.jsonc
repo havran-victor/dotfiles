@@ -86,7 +86,7 @@
     "tooltip-format-disconnected": "Disconnected",
     "interval": 3,
     "nospacing": 1,
-    "on-click": "alacritty --class=Impala -e impala"
+    "on-click": "nmgui"
   },
   "battery": {
     "format": "{capacity}% {icon}",
