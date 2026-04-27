@@ -149,10 +149,6 @@ alias z='cd'
 alias ls='ls --color'
 
 
-eval "$(zoxide init zsh)"
-eval "$(zoxide init --cmd cd zsh)"
-
-
 autoload -U compinit && compinit
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
@@ -160,3 +156,6 @@ autoload -U compinit && compinit
 
 # Created by `pipx` on 2025-08-19 15:50:41
 export PATH="$PATH:/home/victor/.local/bin"
+
+export _ZO_DOCTOR=0
+eval "$(zoxide init --cmd cd zsh)"
