@@ -104,7 +104,7 @@ fi
 # 4) Stow dotfiles (your current repo packages)
 # ---------------------------------------------------
 # Only stow these top-level dirs you have today:
-PKG_DIRS=(alacritty eww hypr mako nvim systemd waybar envd git kitty misc shell tools ghostty tmux starship walker)
+PKG_DIRS=(alacritty eww hypr nvim systemd waybar envd git kitty misc shell tools ghostty tmux starship walker)
 
 log "Stowing packages into \$HOME..."
 for pkg in "${PKG_DIRS[@]}"; do
@@ -145,10 +145,10 @@ enable_user "omarchy-battery-monitor.timer"
 
 # Network/Bluetooth are often wanted; comment if you manage differently
 enable_sys "NetworkManager.service"
+enable_sys "bluetooth.service"
 if have rfkill; then
   rfkill unblock bluetooth 2>/dev/null || true
 fi
-enable_sys "bluetooth.service"
 
 # Make zsh default shell (skip silently if already set)
 if have zsh && [[ "${SHELL:-}" != *zsh ]]; then
