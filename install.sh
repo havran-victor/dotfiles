@@ -91,10 +91,20 @@ if ((${#AUR_PKGS[@]})); then
 fi
 
 # ---------------------------------------------------
+# 3.5) Oh My Zsh (must come before stow so .zshrc works on first launch)
+# ---------------------------------------------------
+if [[ ! -d "$HOME/.oh-my-zsh" ]]; then
+  log "Installing Oh My Zsh..."
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" \
+    "" --unattended --keep-zshrc \
+    || { echo "Warning: Oh My Zsh install failed (network?). Continuing."; true; }
+fi
+
+# ---------------------------------------------------
 # 4) Stow dotfiles (your current repo packages)
 # ---------------------------------------------------
 # Only stow these top-level dirs you have today:
-PKG_DIRS=(alacritty eww hypr mako nvim systemd waybar envd git kitty misc shell tools)
+PKG_DIRS=(alacritty eww hypr mako nvim systemd waybar envd git kitty misc shell tools ghostty tmux starship walker)
 
 log "Stowing packages into \$HOME..."
 for pkg in "${PKG_DIRS[@]}"; do
@@ -112,6 +122,9 @@ done
 if [[ -d "$HOME/.config/hypr/scripts" ]]; then
   find "$HOME/.config/hypr/scripts" -type f -name '*.sh' -exec chmod +x {} +
 fi
+if [[ -d "$HOME/.config/eww/scripts" ]]; then
+  find "$HOME/.config/eww/scripts" -type f -name '*.sh' -exec chmod +x {} +
+fi
 
 # Rebuild font cache if repo ships fonts
 if [[ -d "$HOME/.local/share/fonts" ]]; then
@@ -128,9 +141,13 @@ enable_user "pipewire.service"
 enable_user "wireplumber.service"
 enable_user "xdg-desktop-portal.service"
 enable_user "xdg-desktop-portal-hyprland.service"
+enable_user "omarchy-battery-monitor.timer"
 
 # Network/Bluetooth are often wanted; comment if you manage differently
 enable_sys "NetworkManager.service"
+if have rfkill; then
+  rfkill unblock bluetooth 2>/dev/null || true
+fi
 enable_sys "bluetooth.service"
 
 # Make zsh default shell (skip silently if already set)
