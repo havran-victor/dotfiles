@@ -1,0 +1,5 @@
+vivaldi
+walker-bin
+spotify
+satty
+swayosd

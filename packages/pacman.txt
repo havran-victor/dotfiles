@@ -1,0 +1,65 @@
+# Hyprland stack
+hyprland
+hyprpaper
+hypridle
+hyprlock
+waybar
+eww
+mako
+xdg-desktop-portal
+xdg-desktop-portal-hyprland
+wl-clipboard
+grim
+slurp
+wtype
+
+# Audio
+pipewire
+wireplumber
+pipewire-alsa
+pipewire-pulse
+pipewire-jack
+
+# Terminals & multiplexer
+ghostty
+kitty
+alacritty
+tmux
+
+# Shell & prompt
+zsh
+starship
+zoxide
+
+# Dev tools
+git
+neovim
+ripgrep
+fd
+stow
+unzip
+zip
+github-cli
+
+# CLI tools
+btop
+fastfetch
+lazygit
+mise
+
+# Apps
+discord
+obsidian
+
+# Fonts
+fontconfig
+noto-fonts
+noto-fonts-emoji
+ttf-jetbrains-mono-nerd
+ttf-cascadia-mono-nerd
+
+# System
+networkmanager
+bluez
+bluez-utils
+uwsm
