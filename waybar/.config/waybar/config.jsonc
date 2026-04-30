@@ -6,7 +6,7 @@
   "height": 26,
   "modules-left": [
     "custom/omarchy",
-    "hyprland/workspaces"
+    "custom/workspaces"
   ],
   "modules-center": [
     "clock",
@@ -20,41 +20,17 @@
     "cpu",
     "battery"
   ],
-  "hyprland/workspaces": {
-    "on-click": "activate",
-    "format": "{icon}",
-    "format-icons": {
-      "default": "",
-      "1": "󰣇",
-      "2": "",
-      "3": "",
-      "4": "󱞁",
-      "5": "",
-      "6": "󰚩",
-      "7": "󰇮",
-      "8": "󰖣",
-      "9": "",
-      "10": "",
-      "11": ""
-    },
-    "persistent-workspaces": {
-      "1": [],
-      "2": [],
-      "3": [],
-      "4": [],
-      "5": [],
-      "6": [],
-      "7": [],
-      "8": [],
-      "9": [],
-      "10": [],
-      "11": [],
-      "12": []
-    }
+  "custom/workspaces": {
+    "exec": "~/.config/hypr/scripts/waybar_workspaces.sh",
+    "return-type": "json",
+    "format": "{}",
+    "on-scroll-up": "bash ~/.config/hypr/scripts/move_to_prev_ws.sh",
+    "on-scroll-down": "bash ~/.config/hypr/scripts/move_to_next_ws.sh"
   },
   "custom/omarchy": {
     "format": "",
     "on-click": "omarchy-menu",
+    "on-click-right": "xdg-terminal-exec",
     "tooltip-format": "Omarchy Menu\n\nSuper + Alt + Space"
   },
   "custom/update": {
@@ -73,7 +49,7 @@
     "format": "{:%A %H:%M}",
     "format-alt": "{:%d %B W%V %Y}",
     "tooltip": false,
-    "on-click-right": "omarchy-cmd-tzupdate"
+    "on-click-right": "omarchy-launch-floating-terminal-with-presentation omarchy-tz-select"
   },
   "network": {
     "format-icons": ["󰤯","󰤟","󰤢","󰤥","󰤨"],
@@ -81,8 +57,8 @@
     "format-wifi" : "{icon}",
     "format-ethernet" : "󰀂",
     "format-disconnected" : "󰖪",
-    "tooltip-format-wifi": "{essid} ({frequency} GHz)\n⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
-    "tooltip-format-ethernet": "⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
+    "tooltip-format-wifi": "{essid} ({frequency} GHz)",
+    "tooltip-format-ethernet": "Connected",
     "tooltip-format-disconnected": "Disconnected",
     "interval": 3,
     "nospacing": 1,
@@ -113,9 +89,11 @@
   "bluetooth": {
     "format": "",
     "format-disabled": "󰂲",
-    "format-connected": "",
+    "format-off": "󰂲",
+    "format-connected": "󰂱",
+    "format-no-controller": "",
     "tooltip-format": "Devices connected: {num_connections}",
-    "on-click": "blueberry"
+    "on-click": "omarchy-launch-bluetooth"
   },
   "pulseaudio": {
     "format": "{icon}",
@@ -125,6 +103,8 @@
     "scroll-step": 5,
     "format-muted": "󰝟",
     "format-icons": {
+      "headphone": "",
+      "headset": "",
       "default": ["", "", ""]
     }
   },
@@ -142,6 +122,31 @@
   "custom/expand-icon": {
     "format": " ",
     "tooltip": false
+  },
+  "custom/voxtype": {
+    "exec": "omarchy-voxtype-status",
+    "return-type": "json",
+    "format": "{icon}",
+    "format-icons": {
+      "idle": "",
+      "recording": "󰍬",
+      "transcribing": "󰔟"
+    },
+    "tooltip": true,
+    "on-click-right": "omarchy-voxtype-config",
+    "on-click": "omarchy-voxtype-model"
+  },
+  "custom/idle-indicator": {
+    "on-click": "omarchy-toggle-idle",
+    "exec": "$OMARCHY_PATH/default/waybar/indicators/idle.sh",
+    "signal": 9,
+    "return-type": "json"
+  },
+  "custom/notification-silencing-indicator": {
+    "on-click": "omarchy-toggle-notification-silencing",
+    "exec": "$OMARCHY_PATH/default/waybar/indicators/notification-silencing.sh",
+    "signal": 10,
+    "return-type": "json"
   },
   "tray": {
     "icon-size": 12,

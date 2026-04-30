@@ -1,20 +1,26 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# requires: hyprctl, jq
 MIN_WS=1
 MAX_WS=11
 
-# Get current workspace id (fallback to 1 if parsing fails)
 cur_ws="$(hyprctl activeworkspace -j | jq -r '.id | tonumber? // 1')"
 
-# Compute next workspace with wrap-around
-if (( cur_ws < MIN_WS || cur_ws >= MAX_WS )); then
-  next_ws=$MIN_WS
+if (( cur_ws >= 201 && cur_ws <= 211 )); then
+  group=$(( cur_ws - 200 ))
+elif (( cur_ws >= 101 && cur_ws <= 111 )); then
+  group=$(( cur_ws - 100 ))
+elif (( cur_ws >= 1 && cur_ws <= 11 )); then
+  group=$cur_ws
 else
-  next_ws=$((cur_ws + 1))
+  group=$MIN_WS
 fi
 
-# Switch to the computed workspace
-hyprctl dispatch movetoworkspace "$next_ws"
+if (( group >= MAX_WS )); then
+  next_ws=$MIN_WS
+else
+  next_ws=$(( group + 1 ))
+fi
 
+hyprctl keyword animation "workspaces, 1, 4, easeOutQuint, slide"
+hyprctl dispatch movetoworkspace "$next_ws"
